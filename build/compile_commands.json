@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/5.0.0_10/include/opencv5 -g -std=gnu++17 -arch arm64 -O3 -save-temps -fverbose-asm -o CMakeFiles/st.dir/scalarOriginal.cpp.o -c /Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/scalarOriginal.cpp",
+  "file": "/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/scalarOriginal.cpp",
+  "output": "CMakeFiles/st.dir/scalarOriginal.cpp.o"
+},
+{
+  "directory": "/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/5.0.0_10/include/opencv5 -g -std=gnu++17 -arch arm64 -O3 -save-temps -fverbose-asm -o CMakeFiles/mt.dir/multi.cpp.o -c /Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/multi.cpp",
+  "file": "/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/multi.cpp",
+  "output": "CMakeFiles/mt.dir/multi.cpp.o"
+}
+]
