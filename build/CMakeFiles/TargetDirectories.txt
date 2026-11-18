@@ -1,4 +1,0 @@
-/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/build/CMakeFiles/st.dir
-/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/build/CMakeFiles/mt.dir
-/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/build/CMakeFiles/edit_cache.dir
-/Users/satyapranav/Documents/CalPoly/HighPerfEmbSys/FinalProject/cpe4420-final-project/build/CMakeFiles/rebuild_cache.dir
