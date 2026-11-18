@@ -77,13 +77,14 @@ int main(int argc, char** argv) {
     video.read(frame);
     const int rows = frame.rows;
     const int cols = frame.cols;
-
     cv::Mat sobelOutput(rows - 2, cols - 2, CV_8UC1);
 
-    if (display) {
-        cv::namedWindow("Output", cv::WINDOW_NORMAL);
-    }
+    // Timing variables
+    using namespace std::chrono;
+    steady_clock::time_point startTime, endTime;
+    double totalTime = 0.0;
 
+    // Multhreading variables & objects
     using namespace operations;
     operations::RowWorkerPool workers(threadCount);
     cv::Mat refSobel, diff;
@@ -93,14 +94,19 @@ int main(int argc, char** argv) {
     for (int i = 0; i < iterations; ++i) {
         if (frame.empty()) break;
 
+        startTime = std::chrono::high_resolution_clock::now();
         workers.runRows(rows - 2, [&](int firstRow, int lastRow) {
             operations::processSegment(frame, sobelOutput, firstRow, lastRow);
         });
-        
-        if (display) {
-            cv::imshow("Output", sobelOutput);
-            cv::waitKey(1);
-        }
+        endTime = std::chrono::high_resolution_clock::now();
+        totalTime += std::chrono::duration<double, std::milli>(endTime - startTime).count();
+
+    }
+
+    if (display) {
+        cv::namedWindow("Output", cv::WINDOW_NORMAL);
+        cv::imshow("Output", sobelOutput);
+        cv::waitKey(1);
     }
 
     // Single-threaded reference and error (outside all timed sections)
@@ -152,13 +158,15 @@ int main(int argc, char** argv) {
         const double meanError = errorStats.pixels
             ? errorStats.sumAbsDiff / errorStats.pixels : 0.0;
         const bool checksumMatch = checksum(sobelOutput) == checksum(refSobel);
+        const double time = totalTime / iterations;
 
         std::cout << std::fixed << std::setprecision(2);
         std::cout << "Configuration: optimized_" << threadCount << "T\n";
         std::cout << "Thread count: " << threadCount << "\n";
         std::cout << "Iterations: " << iterations << "\n";
-        std::cout << "Loop Checksum: " << checksum(sobelOutput) << "\n";
-        std::cout << "Reference Checksum: " << checksum(refSobel) << "\n";
+        std::cout << "Average time per frame: " << time << " ms\n";
+        std::cout << "Multithreaded Loop Checksum: " << checksum(sobelOutput) << "\n";
+        std::cout << "Scalar Reference Checksum: " << checksum(refSobel) << "\n";
         std::cout << "Checksums Match: " << (checksumMatch ? "Yes" : "No") << "\n";
 
         std::cout << std::setprecision(6);
